@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" crossorigin="anonymous">
+  </head>
+  <body style="background-color:#151B54;">
+  <div class="container">
+  <div class="align-middle" style="padding: 15%;">
+  	<h1 class="text-center " style="color : #E5E4E2; border-top: 200px; vertical-align: middle;"> Make a request or  Complete one!</h1>
+  </div>
+
+	<script src="https://www.gstatic.com/firebasejs/4.3.0/firebase.js"></script>
+	<script>
+	  // Initialize Firebase
+	  var config = {
+	    apiKey: "AIzaSyBkqHdZQp8zarlWhTpUCSmbP3iuYq9YxzU",
+	    authDomain: "nagarro-a5bc3.firebaseapp.com",
+	    databaseURL: "https://nagarro-a5bc3.firebaseio.com",
+	    projectId: "nagarro-a5bc3",
+	    storageBucket: "nagarro-a5bc3.appspot.com",
+	    messagingSenderId: "140980778030"
+	  };
+	  firebase.initializeApp(config);
+	</script>
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.firebase.com/libs/firebaseui/2.3.0/firebaseui.js"></script>
+    <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/2.3.0/firebaseui.css" />
+    <script type="text/javascript">
+      // FirebaseUI config.
+      var uiConfig = {
+      	signInSuccessUrl : 'http://localhost:1996/main',
+        signInOptions: [
+          // Leave the lines as is for the providers you want to offer your users.
+          firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+        ],
+        // Terms of service url.
+        tosUrl: 'localhost:1996/demo'
+      };
+
+      // Initialize the FirebaseUI Widget using Firebase.
+      var ui = new firebaseui.auth.AuthUI(firebase.auth());
+      // The start method will wait until the DOM is loaded.
+      ui.start('#firebaseUI', uiConfig);
+      
+      firebase.auth().onAuthStateChanged(function(user){
+      	var auth = 'http://localhost:1996/auth';
+  		if(user){
+  			/*
+  			console.log(user.displayName);
+  			console.log(user.email);
+  			console.log(user.photoURL);
+  			*/
+  			auth = 'http://localhost:1996/auth?' +
+  			'name='+user.displayName + '&'+
+  			'email='+user.email+'&'+
+  			'photo='+user.photoURL+'&'+
+        'id='+user.uid;
+  			console.log(auth);
+  		}
+  		else{
+  			auth = 'http://localhost:1996/auth?'+
+  			'name='+'anonymous' + '&'+
+  			'email='+'anonymous'+'&'+
+  			'photo='+'public/images/anonymous.jpg'+'&'+
+        'id='+'0';
+        console.log(auth);
+  		}
+  		$.get(auth,function(data,status){
+  			console.log('Updated');
+  		});
+  	})
+    </script>
+    <div id="firebaseUI"></div>
+    <div class="text-center">
+    	<a  href = "/generalRequests" style="color: #E5E4E2">skip sign in</a>
+    </div>
+  </div>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" crossorigin="anonymous"></script>
+  </body>
+</html>

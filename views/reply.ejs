@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+  </head>
+  <body style="background-color: lightgrey;">
+  <div class="container" >
+    <form onsubmit="updateReply()" action = '/generalRequests'>
+    <div class="form-group">
+      <label>Name</label>
+      <h4 id="name"><%=  user.name %></h4>
+    </div>
+    <div class="form-group">
+      <label for="exampleFormControlInput1">Price</label>
+      <input type="text" class="form-control" id="price" placeholder="Money Money!">
+    </div>
+    <div class="form-group">
+      <label for="exampleFormControlTextarea1">Time</label>
+      <input type="time" class="form-control" id ="time">
+    </div>
+    <div class="form-group">
+      <label>Contact No</label>
+      <input type="text" class="form-control" id="contact" placeholder="Contact">
+    </div>
+    <div class="form-group">
+      <label>Comments</label>
+      <input type="text" class="form-control" id="comment" placeholder="Comments">
+    </div>
+    <div class="form-group">
+      <button type="submit" value="Submit" class="btn btn-success">Submit Reply</button>
+    </div>
+  </form>
+  </div>
+
+  <script src="https://www.gstatic.com/firebasejs/4.3.0/firebase.js"></script>
+  <script>
+    // Initialize Firebase
+    var config = {
+      apiKey: "AIzaSyBkqHdZQp8zarlWhTpUCSmbP3iuYq9YxzU",
+      authDomain: "nagarro-a5bc3.firebaseapp.com",
+      databaseURL: "https://nagarro-a5bc3.firebaseio.com",
+      projectId: "nagarro-a5bc3",
+      storageBucket: "nagarro-a5bc3.appspot.com",
+      messagingSenderId: "140980778030"
+    };
+    firebase.initializeApp(config);
+    var refRequest = firebase.database().ref('requests').child('<%= id %>');
+    var updateReply = function(){
+      var update = {};
+      update['name'] = document.getElementById('name').innerHTML.toString();
+      update['price'] = document.getElementById('price').value.toString();
+      update['time'] = document.getElementById('time').value.toString();
+      update['comment'] = document.getElementById('comment').value.toString();
+      update['contact'] = document.getElementById('contact').value.toString();
+      update = JSON.stringify(update);
+      update = JSON.parse(update);
+      var refReply = firebase.database().ref('replies');
+      const key = refReply.push().key;
+      refReply.child(key).set(update);
+      refRequest.child('comments').child(key).set({
+        'val' : true
+      });
+      console.log('Done');
+      window.alert('Reply Sent');
+    }
+  </script>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
+  </body>
+</html>

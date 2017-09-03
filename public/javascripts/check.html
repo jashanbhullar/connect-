@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+
+<script src="https://www.gstatic.com/firebasejs/4.3.0/firebase.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyBkqHdZQp8zarlWhTpUCSmbP3iuYq9YxzU",
+    authDomain: "nagarro-a5bc3.firebaseapp.com",
+    databaseURL: "https://nagarro-a5bc3.firebaseio.com",
+    projectId: "nagarro-a5bc3",
+    storageBucket: "nagarro-a5bc3.appspot.com",
+    messagingSenderId: "140980778030"
+  };
+  firebase.initializeApp(config);
+  var ref = firebase.database().ref('requests/');
+  ref.on('value',snap =>{
+  	console.log(snap.val());
+  });
+</script>
+</body>
+</html>

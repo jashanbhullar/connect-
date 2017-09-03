@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
+    <a class="navbar-brand" href="#">Happy to help!</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link" href="/main">Home</a>
+      </li>
+    </ul>
+      <form class="form-inline my-2 my-lg-0">
+        <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+      </form>
+    </div>
+  </nav>
+  </head>
+  <body style="background-color: #424242;">
+  <br>
+  <div class="container">
+
+        <% var keys = Object.keys(data) %> 
+    <div class="card-columns">
+        <% keys.forEach(key =>{ %>
+          <div class="card img-rounded" style="width: 24rem;background-color: #BDBDBD;">
+          <div class="card-block">
+            <h4 class="card-title" style="margin: 5%;"><%= data[key].title %></h4>
+            <h5 class="card-text" style="margin: 5%;margin-top: 1%;"><b><%= data[key].category %></b></h5>
+            <p class="card-text" style="margin: 5%;margin-top: 1%;"><%= data[key].description %></p>
+            <div class="card-body">
+              <h5><%= data[key].locationCity %>&nbsp;<small><%= data[key].locationArea %> </small> </h5>
+              <b><%= data[key].date %></b>
+              <p>
+                Time Slots : <%= data[key].time1 %> - <%= data[key].time2 %>
+              </p>
+            </div>
+          </div>
+        </div>
+        <% }) %>
+        </div>
+      </div>
+      <h1 class="text-center" style="color: green;"><i>Replies</i></h1>
+      <% var comments = Object.keys(replies) %>
+      <div class="card-columns">
+        <% comments.forEach(comment =>{ %>
+        <div class="card img-rounded" style="width: 24rem;background-color: #2EFE64;">
+          <div class="card-block">
+            <h4 class="card-title" style="margin: 5%;"><%= replies[comment].name %></h4>
+            <h3 class="card-text" style="margin: 5%;margin-top: 1%;"><b>Time : <%= replies[comment].time %></b></h3>
+            <h2 class="card-text" style="margin: 5%;margin-top: 1%;"><b>Price : <%= replies[comment].price %></b></h2>
+            <p class="card-text" style="margin: 5%;margin-top: 1%;"> <%= replies[comment].comment %></p>
+          </div>
+        </div>
+
+        <% }) %>
+        
+      </div>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" crossorigin="anonymous"></script>
+  </body>
+</html>
