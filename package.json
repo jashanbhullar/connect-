@@ -1,5 +1,5 @@
 {
-  "name": "nagarro",
+  "name": "connect!",
   "version": "0.0.0",
   "private": true,
   "scripts": {
@@ -14,5 +14,26 @@
     "firebase": "^4.3.0",
     "morgan": "~1.8.1",
     "serve-favicon": "~2.4.2"
-  }
+  },
+  "description": "Realtime mobile Web-App for creating and fulfilling request of peers",
+  "main": "app.js",
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jashanbhullar/connect-.git"
+  },
+  "keywords": [
+    "REALTIME",
+    "FIREBASE",
+    "NODEJS",
+    "EXPRESS",
+    "MARKET",
+    "SMART_CITY"
+  ],
+  "author": "jsbhullar96@gmail.com",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jashanbhullar/connect-/issues"
+  },
+  "homepage": "https://github.com/jashanbhullar/connect-#readme"
 }
